@@ -1,6 +1,6 @@
 
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QLabel, QStackedWidget
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QLabel, QStackedWidget, QPushButton, QSpacerItem, QSizePolicy
 from gui.widgets import SideNavigation
 from gui.views import DashboardView, PersonnelView, PlanningView, TachesView
 
@@ -23,7 +23,17 @@ class MainWindow(QMainWindow):
         self.header = QWidget()
         self.header.setObjectName("Header")
         self.header_layout = QHBoxLayout(self.header)
-        self.header_layout.addWidget(QLabel("Nexus"))
+        self.header_layout.setContentsMargins(24, 0, 24, 0)
+        self.header_layout.setSpacing(0)
+        self.title_label = QLabel("Tableau de Bord")
+        self.title_label.setObjectName("HeaderTitle")
+        self.header_layout.addWidget(self.title_label)
+        self.header_layout.addStretch()
+        # Placeholder pour actions rapides (notifications, etc.)
+        self.action_btn = QPushButton("🔔")
+        self.action_btn.setObjectName("HeaderAction")
+        self.action_btn.setFixedSize(36, 36)
+        self.header_layout.addWidget(self.action_btn)
         self.main_layout.addWidget(self.header)
 
         # Zone de contenu principale
@@ -50,6 +60,7 @@ class MainWindow(QMainWindow):
 
         # Connexions
         self.side_nav.view_changed.connect(self.change_view)
+        self.side_nav.profile_clicked.connect(self.open_profile_menu)
 
         # Vue initiale
         self.side_nav.buttons["dashboard"].setChecked(True)
@@ -57,6 +68,18 @@ class MainWindow(QMainWindow):
 
     def change_view(self, name):
         self.stacked_widget.setCurrentWidget(self.views[name])
+        # Met à jour le titre de l'en-tête dynamiquement
+        titres = {
+            "dashboard": "Tableau de Bord",
+            "personnel": "Gestion du Personnel",
+            "planning": "Planning",
+            "taches": "Tâches",
+        }
+        self.title_label.setText(titres.get(name, "Nexus"))
+
+    def open_profile_menu(self):
+        # Placeholder pour menu profil/préférences
+        print("Menu profil/préférences ouvert (à implémenter)")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

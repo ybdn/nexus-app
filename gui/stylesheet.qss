@@ -4,15 +4,15 @@
 
 /* Global */
 QWidget {
-    background-color: #0d1117; /* Page background */
-    color: #c9d1d9; /* Main text color */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    background-color: #f6f9fc;
+    color: #222b45;
+    font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
     border: none;
 }
 
 /* Main Window & Content Area */
 #MainWindow, #CentralWidget {
-    background-color: #0d1117;
+    background-color: #f6f9fc;
 }
 
 #ContentArea {
@@ -21,8 +21,28 @@ QWidget {
 
 /* Header Bar */
 #Header {
-    background-color: #161b22; /* Top bar background */
-    border-bottom: 1px solid #30363d;
+    background-color: #f6f9fc;
+    border-bottom: none;
+    min-height: 60px;
+}
+#HeaderTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #222b45;
+    letter-spacing: 0.5px;
+    padding: 0 0 0 2px;
+}
+#HeaderAction {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #2563eb;
+    border-radius: 18px;
+    margin-left: 12px;
+}
+#HeaderAction:hover {
+    background: #e3eafe;
+    color: #1746a2;
 }
 
 #Header QLabel {
@@ -33,28 +53,48 @@ QWidget {
 
 /* Side Navigation */
 #SideNav {
-    background-color: #161b22;
-    border-right: 1px solid #30363d;
+    background-color: #2563eb;
+    border-right: none;
+}
+
+#NavAvatar {
+    background: #fff;
+    color: #2563eb;
+    font-size: 2.2rem;
+    font-weight: 700;
+    border-radius: 28px;
+    margin-bottom: 8px;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 8px rgba(37,99,235,0.10);
 }
 
 #SideNav QPushButton {
     background-color: transparent;
-    color: #c9d1d9;
-    font-size: 14px;
+    color: #fff;
+    font-size: 18px;
     text-align: left;
-    padding: 10px 15px;
-    border-radius: 6px;
-    margin: 4px 8px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    margin: 4px 10px;
 }
 
-#SideNav QPushButton:hover {
-    background-color: #21262d;
+#SideNav QPushButton:hover, #SideNav QPushButton:checked {
+    background-color: #1746a2;
+    color: #fff;
+    font-weight: 600;
 }
 
-#SideNav QPushButton:checked {
-    background-color: #58a6ff; /* Blue selection */
-    color: #ffffff;
-    font-weight: bold;
+#ProfileButton {
+    background-color: #1746a2;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 10px;
+    margin: 16px 10px 0 10px;
+    padding: 12px 20px;
+}
+#ProfileButton:hover {
+    background-color: #2563eb;
+    color: #fff;
 }
 
 /* Content Box (like GitHub's white boxes) */
@@ -75,18 +115,25 @@ QWidget {
 
 /* Tables */
 QTableView {
-    background-color: #0d1117;
-    border: 1px solid #30363d;
-    gridline-color: #21262d;
-    font-size: 14px;
+    background-color: #fff;
+    border: 1.5px solid #e3eafe;
+    gridline-color: #e3eafe;
+    font-size: 16px;
+    border-radius: 12px;
+    selection-background-color: #e3eafe;
+    selection-color: #2563eb;
+    alternate-background-color: #f6f9fc;
 }
-
+QTableView::item:hover {
+    background: #e3eafe;
+}
 QHeaderView::section {
-    background-color: #161b22;
-    color: #c9d1d9;
-    padding: 10px;
-    border-bottom: 1px solid #30363d;
+    background-color: #f6f9fc;
+    color: #2563eb;
+    padding: 14px;
+    border-bottom: 1.5px solid #e3eafe;
     font-weight: 600;
+    font-size: 1.1rem;
 }
 
 /* Buttons */
@@ -103,19 +150,69 @@ QPushButton:hover {
 }
 
 QPushButton#PrimaryButton {
-    background-color: #238636; /* Green */
-    color: white;
-    border-color: #2ea043;
+    background-color: #2563eb;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px 26px;
+    border: none;
+    font-size: 1.1rem;
 }
 QPushButton#PrimaryButton:hover {
-    background-color: #2ea043;
+    background-color: #1746a2;
 }
-
 QPushButton#DangerButton {
-    background-color: #da3633; /* Red */
-    color: white;
-    border-color: #f85149;
+    background-color: #ef4444;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px 26px;
+    border: none;
+    font-size: 1.1rem;
 }
 QPushButton#DangerButton:hover {
-    background-color: #f85149;
+    background-color: #b91c1c;
+}
+
+#DashboardCard {
+    background: #fff;
+    border-radius: 18px;
+    border: 1.5px solid #e3eafe;
+    min-width: 180px;
+    min-height: 120px;
+}
+#DashboardCard:hover {
+}
+#CardIcon {
+    margin-bottom: 2px;
+}
+#CardTitle {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #2563eb;
+    margin-bottom: 2px;
+}
+#CardValue {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin-top: 0px;
+}
+
+.StatusBadge {
+    border-radius: 8px;
+    padding: 2px 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: #2563eb;
+    min-width: 60px;
+    text-align: center;
+    margin: 0 2px;
+}
+.StatusBadge[statut="Absent"] {
+    background: #ef4444;
+}
+.StatusBadge[statut="Actif"] {
+    background: #10b981;
 }
