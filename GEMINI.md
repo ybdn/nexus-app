@@ -11,7 +11,7 @@ Pour plus de détails, consultez le `README.md`.
 ## Technologies
 
 - **Langage** : Python 3
-- **Interface Graphique (GUI)** : `customtkinter`
+- **Interface Graphique (GUI)** : `flet`
 - **Base de données** : `sqlite3` (module natif de Python)
 - **Packaging** : `PyInstaller` (prévu pour la distribution)
 

@@ -1,0 +1,121 @@
+/*
+ * GitHub Dark Inspired Theme for Nexus
+ */
+
+/* Global */
+QWidget {
+    background-color: #0d1117; /* Page background */
+    color: #c9d1d9; /* Main text color */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    border: none;
+}
+
+/* Main Window & Content Area */
+#MainWindow, #CentralWidget {
+    background-color: #0d1117;
+}
+
+#ContentArea {
+    background-color: #0d1117;
+}
+
+/* Header Bar */
+#Header {
+    background-color: #161b22; /* Top bar background */
+    border-bottom: 1px solid #30363d;
+}
+
+#Header QLabel {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* Side Navigation */
+#SideNav {
+    background-color: #161b22;
+    border-right: 1px solid #30363d;
+}
+
+#SideNav QPushButton {
+    background-color: transparent;
+    color: #c9d1d9;
+    font-size: 14px;
+    text-align: left;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 4px 8px;
+}
+
+#SideNav QPushButton:hover {
+    background-color: #21262d;
+}
+
+#SideNav QPushButton:checked {
+    background-color: #58a6ff; /* Blue selection */
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Content Box (like GitHub's white boxes) */
+#ContentBox {
+    background-color: #161b22; /* Box background */
+    border: 1px solid #30363d;
+    border-radius: 6px;
+}
+
+/* Titles inside ContentBox */
+#ViewTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #c9d1d9;
+    padding: 15px;
+    border-bottom: 1px solid #30363d;
+}
+
+/* Tables */
+QTableView {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    gridline-color: #21262d;
+    font-size: 14px;
+}
+
+QHeaderView::section {
+    background-color: #161b22;
+    color: #c9d1d9;
+    padding: 10px;
+    border-bottom: 1px solid #30363d;
+    font-weight: 600;
+}
+
+/* Buttons */
+QPushButton {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 16px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+}
+
+QPushButton:hover { 
+    border-color: #8b949e; 
+}
+
+QPushButton#PrimaryButton {
+    background-color: #238636; /* Green */
+    color: white;
+    border-color: #2ea043;
+}
+QPushButton#PrimaryButton:hover {
+    background-color: #2ea043;
+}
+
+QPushButton#DangerButton {
+    background-color: #da3633; /* Red */
+    color: white;
+    border-color: #f85149;
+}
+QPushButton#DangerButton:hover {
+    background-color: #f85149;
+}

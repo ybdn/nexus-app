@@ -1,18 +1,21 @@
-from core.database import initialize_database
-from gui.main_window import App
+
+import sys
+from PyQt6.QtWidgets import QApplication
+from gui.main_window import MainWindow
 
 def main():
-    """
-    Point d'entrée principal de l'application.
-    """
-    # 1. S'assurer que la base de données et les tables sont prêtes
-    print("Initialisation de la base de données...")
-    initialize_database()
+    app = QApplication(sys.argv)
 
-    # 2. Créer et lancer l'interface graphique
-    print("Lancement de l'application...")
-    app = App()
-    app.mainloop()
+    # Load stylesheet
+    try:
+        with open("gui/stylesheet.qss", "r") as f:
+            app.setStyleSheet(f.read())
+    except FileNotFoundError:
+        print("Stylesheet not found.")
+
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())
 
 if __name__ == "__main__":
     main()
