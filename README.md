@@ -4,91 +4,108 @@ Nexus est une application de bureau visant à centraliser la gestion du personne
 
 ## ✨ Fonctionnalités
 
-- **Gestion de Planning** : Création et visualisation de plannings mensuels prévisionnels.
+- **Gestion de Planning** : Création et visualisation de plannings hebdomadaires et mensuels.
 - **Service Journalier** : Génération et suivi du service pour chaque jour.
 - **Gestion des Tâches** : Attribution et suivi de tâches pour les équipes.
-- **Gestion des Rôles et Permissions** : Contrôle d'accès fin basé sur les rôles (administrateur, chef d'équipe, membre).
+- **Gestion des Rôles et Permissions** : Contrôle d'accès fin basé sur les rôles (administrateur, manager, employé).
 - **Centralisation** : Une seule plateforme pour toutes les informations relatives à l'organisation de l'équipe.
+- **Thème sombre inspiré de GitHub** : Interface moderne et personnalisable.
+- **Préférences utilisateur** : Thème et état de la barre latérale persistants.
 
 ## 🛠️ Technologies
 
 | Partie              | Technologies                                 |
 | ------------------- | -------------------------------------------- |
-| **Application**     | `Python`, `CustomTkinter`                    |
+| **Application**     | `Python`, `PyQt6`, `qtawesome`               |
 | **Base de données** | `SQLite` (via un fichier partagé `nexus.db`) |
 
 ## 📂 Structure du Dépôt
 
+```
 .
 ├── core/
-│ ├── **init**.py
-│ └── database.py # Logique pour la connexion et les opérations sur la BDD SQLite.
+│   ├── __init__.py
+│   ├── database.py        # Gestion de la base SQLite (création, tables)
+│   ├── models.py          # Modèles de données (User, Team, Absence, Task)
+│   ├── preferences.py     # Gestion des préférences utilisateur (JSON)
+│   └── services.py        # Logique métier (simulation en mémoire)
 ├── gui/
-│ ├── **init**.py
-│ └── main_window.py # Code pour la fenêtre principale de l'application.
-├── assets/ # Dossier pour les icônes ou autres ressources.
-├── main.py # Point d'entrée principal de l'application.
-├── requirements.txt # Fichier listant les dépendances Python.
-└── README.md # Documentation du projet.
+│   ├── __init__.py
+│   ├── main_window.py     # Fenêtre principale (PyQt6)
+│   ├── views.py           # Vues : Dashboard, Personnel, Planning, Tâches
+│   ├── widgets.py         # Widgets personnalisés (navigation latérale)
+│   └── stylesheet.qss     # Thème sombre inspiré GitHub
+├── assets/                # Icônes ou autres ressources
+├── main.py                # Point d'entrée principal de l'application
+├── requirements.txt       # Dépendances Python
+├── user_preferences.json  # Préférences utilisateur (généré au runtime)
+└── README.md              # Documentation du projet
+```
+
+## 🧩 Modèles de Données (extraits)
+
+```python
+from dataclasses import dataclass, field
+from typing import List, Literal, Optional
+
+@dataclass
+class User:
+    id: int
+    username: str
+    role: Literal['employe', 'manager', 'admin']
+    team_id: Optional[int] = None
+
+@dataclass
+class Team:
+    id: int
+    name: str
+    members: List[User] = field(default_factory=list)
+```
 
 ## 🚀 Démarrage Rapide
 
-Pour installer et lancer l'application, suivez ces étapes :
-
-1. **Cloner le projet** (si vous utilisez git) :
-
+1. **Cloner le projet** :
    ```bash
    git clone <url_du_projet>
-   cd nexus_app
+   cd nexus-app
    ```
-
 2. **Créer un environnement virtuel** :
-
    ```bash
    python -m venv venv
    ```
-
 3. **Activer l'environnement** :
-
-   - Sur Windows :
-
-     ```bash
-     .\venv\Scripts\activate
-     ```
-
-   - Sur macOS/Linux :
-
-     ```bash
-     source venv/bin/activate
-     ```
-
+   - Windows : `venv\Scripts\activate`
+   - macOS/Linux : `source venv/bin/activate`
 4. **Installer les dépendances** :
-
    ```bash
    pip install -r requirements.txt
    ```
+5. **Lancer l'application** :
+   ```bash
+   python main.py
+   ```
 
-**5. Lancer l'application** :
+Au premier lancement, un fichier `nexus.db` et un fichier `user_preferences.json` seront créés à la racine du projet.
 
-```bash
-python main.py
-```
+## 🎨 Thème et Préférences Utilisateur
 
-Au premier lancement, un fichier `nexus.db` sera créé à la racine du projet.
+- Le thème sombre est appliqué par défaut (voir `gui/stylesheet.qss`).
+- Les préférences utilisateur (état de la barre latérale, mode clair/sombre) sont sauvegardées dans `user_preferences.json`.
 
 ## 📦 Déploiement
 
-Le projet est conçu pour être packagé en un fichier `.exe` autonome à l'aide de **PyInstaller**.
-
+Le projet peut être packagé en exécutable autonome avec **PyInstaller** :
 ```bash
-# Exemple de commande de packaging
 pyinstaller --onefile --windowed --name NexusApp main.py
 ```
 
-## 🌐 Configuration Multi-Utilisateurs
+## 🌐 Multi-Utilisateurs
 
-Pour que plusieurs utilisateurs puissent accéder aux mêmes données, le fichier `nexus.db` doit être partagé :
-
+Pour partager la base de données :
 1. Lancez l'application une première fois pour générer `nexus.db`.
-2. Déplacez ce fichier `nexus.db` vers un lecteur réseau accessible par tous les postes de travail (par exemple, `Z:\DossierPartage\nexus.db`).
-3. (Étape future) Mettez à jour le chemin dans `core/database.py` pour pointer vers l'emplacement réseau du fichier.
+2. Déplacez ce fichier vers un dossier réseau accessible à tous.
+3. Modifiez le chemin dans `core/database.py` si besoin.
+
+## 🔗 Ressources complémentaires
+- Voir `docs/` pour les spécifications détaillées backend et UI.
+- Voir `gui/README_GUI.md` pour la documentation spécifique à l'interface graphique.
